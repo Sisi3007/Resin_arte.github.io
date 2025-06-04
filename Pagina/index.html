@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESIN-ARTE</title>
+    <link rel="stylesheet" href="Estilos.css">
+    <style>
+        #carrito-modal .cerrar-btn:hover {
+            background-color: #fc74c4;
+        }
+
+        /* Estilo general */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;/* Botones generales */
+        button {
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f45699; /* Rosa inicial */
+        }
+
+        button:hover {
+            background-color: #fc74c4; /* Rosa más claro */
+            transform: scale(1.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Botón del carrito */
+        .carrito-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+background-color: #333;
+        }
+
+        /* Botón para cerrar el carrito */
+        .cerrar-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Estilo de la ventana del carrito */
+        #carrito-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: none;
+            z-index: 1000;
+        }
+
+        #carrito-modal ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #carrito-modal li {
+            margin-bottom: 10px;
+        }
+
+            padding: 0;
+            background-color: #fae0f5;
+            color: #333;
+        }
+
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        header {
+            background-color: #f45699;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        /* Navegación */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #faf8fb;
+            padding: 15px 20px;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background-color: #fbcaeb;
+            transition: background-color 0.3s;
+        }
+
+        /* Galería */
+        .galeria img {
+            width: 130px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .galeria img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Secciones generales */
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            background-color: #faf8fb;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #fc74c4;
+        }
+
+
+        section h4 {
+            color: #FE7F9C;
+        }
+
+
+
+        /* Reseñas */
+        #reseñas {
+            font-style: italic;
+        }
+
+        /* Newsletter */
+        #newsletter input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #newsletter button {
+            padding: 10px;
+            background-color: #f45699;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #newsletter button:hover {
+            background-color: #f45699;
+        }
+
+        /* WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+.producto img {
+    width: 100px; /* Tamaño más pequeño */
+    height: auto; /* Mantener proporciones */
+    border-radius: 10px; /* Bordes redondeados */
+}
+.productos-container {
+    display: flex; /* Mostrar los productos en fila */
+    gap: 20px; /* Espacio entre productos */
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    white-space: nowrap; /* Evita que los productos se acomoden en varias líneas */
+    padding: 10px;
+}
+
+/* Ajustar el tamaño de los productos */
+.producto {
+    min-width: 200px; /* Tamaño mínimo para cada producto */
+    text-align: center; /* Centra el texto */
+}
+
+/* Ajustar el tamaño de las imágenes */
+.producto img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+.contenedor-video {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    background-color: #d27bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #b056e3;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>¡Explora Nuestros Productos de Resina!</h1>
+        <button class="carrito-btn" onclick="mostrarCarrito()">🛒 Ver Carrito</button>
+    </header>
+    <nav>
+        <ul><li><a href="#Conócenos">Conócenos</a></li>
+<li><a href="#Misión y Visión">Misión y Visión</a></li>
+<li><a href="#Objetivo General">Objetivo General</a></li>
+<li><a href="#Objetivos Específicos">Objetivos Específicos</a></li>
+
+            <li><a href="#productos">Productos</a></li>
+<li><a href="#promocion">Promociones</a></li>
+            <li><a href="#Colecciónes">Colecciónes</a></li>
+                       <li><a href="#videos">Videos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    <main>
+<!-- Banner principal -->
+    <section id="banner">
+        <div class="banner-content">
+            <h1>Descubre Nuestra Colección Única</h1>
+            <p>Arte en resina con diseños exclusivos hechos a mano ✨</p>
+            <a href="#Colecciónes" class="boton">Ver Colecciónes</a>
+        </div>
+    </section>
+
+
+      <!-- Conócenos -->
+    <section id="Conócenos">
+        <h2>🌟 Conócenos</h2>
+        <p class="subtitulo">💡 Creatividad en cada pieza, pasión en cada detalle</p>
+        <p>Somos un grupo de emprendedoras que han transformado la resina en <strong>arte con propósito</strong>. Más que un negocio, somos una comunidad impulsada por la creatividad y la emoción de convertir cada idea en algo <strong>único y especial</strong>.</p>
+        <p>🌿 <strong>Creemos en la belleza de lo hecho a mano</strong>, en la dedicación que da vida a cada pieza y en la magia de regalar algo que <strong>cuente una historia</strong>.</p>
+        <p>💎 Desde llaveros y alhajeros hasta decoraciones exclusivas, todo está hecho con amor, reflejando nuestra esencia y compromiso con la calidad.</p>
+        <p class="resaltado">🤝 <strong>No solo vendemos productos, construimos sueños.</strong> Gracias por acompañarnos en este viaje de arte, pasión y emprendimiento. 🌈✨</p>
+ <h2>🎭 Nuestro arte, tu historia</h2>
+        <p>Cada pieza que creamos no es solo resina; es un reflejo de <strong>creatividad, dedicación y el deseo de transmitir emociones</strong>. 💖</p>
+        <p>🌟 Gracias por ser parte de nuestra comunidad emprendedora. ¿Listo para descubrir tu próxima pieza especial? ✨</p>
+    
+    </section>
+
+    <!-- Misión y Visión -->
+    <section id="Misión y Visión">
+        <h2>🚀 Misión y Visión</h2>
+        <div class="contenido">
+            <h3>🌎 Misión</h3>
+            <p>Crear <strong>piezas únicas y personalizadas</strong> con resina que reflejen originalidad y dedicación artesanal. Nuestro compromiso va más allá de embellecer espacios; buscamos impulsar el talento emprendedor y fortalecer el trabajo colaborativo de mujeres artesanas.</p>
+
+            <h3>🔮 Visión</h3>
+            <p>Ser una marca reconocida por su <strong>innovación y excelencia</strong>, destacándonos en el mercado artesanal por nuestra creatividad, calidad y compromiso. Queremos inspirar y empoderar a más emprendedoras, construyendo una comunidad donde <strong>el arte hecho a mano sea valorado y celebrado</strong>.</p>
+        </div>
+    </section>
+
+    <!-- Objetivo General -->
+    <section id="Objetivo General">
+        <h2>🎯 Objetivo General</h2>
+        <p>✨ Desarrollar una empresa artesanal especializada en la creación de llaveros y piezas de resina <strong>personalizadas y exclusivas</strong>, enfocándonos en calidad, creatividad y sostenibilidad.</p>
+        <p>💡 Queremos ofrecer productos que conecten con los sueños de nuestros clientes y reflejen nuestra pasión por el arte.</p>
+    </section>
+
+    <!-- Objetivos Específicos -->
+    <section id="Objetivos Específicos">
+        <h2>📌 Objetivos Específicos</h2>
+        <ul>
+            <li>🎨 <strong>Diseño y personalización</strong> 🖌️ 
+<p> Crear piezas con materiales de alta calidad, priorizando la <strong>originalidad</strong> y la <strong>atención al detalle</strong> para destacar en el mercado.</li></p>
+            <li>📢 <strong>Expansión digital</strong> 💻 
+<p>Impulsar estrategias de <strong>marketing y redes sociales</strong> para conectar con más clientes y fortalecer nuestra marca.</li></p>
+            <li>⚙️ <strong>Eficiencia en producción</strong> 🏭 <p>Optimizar los procesos artesanales para <strong>minimizar desperdicio</strong> y garantizar una producción <strong>sostenible y responsable</strong>.</li></p>
+            <li>🛍️ <strong>Colaboraciones estratégicas</strong> 🔗 <p> Establecer alianzas con tiendas y participar en <strong>ferias y bazares</strong> para ampliar nuestra presencia y distribución.</li></p>
+            <li>🚀 <strong>Logística y servicio al cliente</strong> 📦 <p> Implementar un sistema de distribución <strong>ágil y eficiente</strong>, asegurando que cada pedido llegue <strong>puntual</strong> y con una experiencia excepcional.</li></p>
+        </ul>
+    </section>
+
+<!-- Sección de productos -->
+<section id="productos">
+    <h2>Nuestros Productos</h2>
+    <div class="productos-container">
+        <!-- Producto 1 -->
+        <div class="producto">
+            <img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto0.jpeg" alt="Producto 1">
+            <p>Producto 1 - $40</p>
+            <button onclick="agregarAlCarrito('Producto 1', 40)">Añadir al Carrito</button>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto">
+            <img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto3.1.jpeg" alt="Producto 2">
+            <p>Producto 2 - $30</p>
+            <button onclick="agregarAlCarrito('Producto 2', 30)">Añadir al Carrito</button>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto">
+            <img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto5.jpeg" alt="Producto 3">
+            <p>Producto 3 - $15</p>
+            <button onclick="agregarAlCarrito('Producto 3', 15)">Añadir al Carrito</button>
+        </div>
+    </div>
+
+    <!-- Botón para ver más productos -->
+    <div class="ver-mas">
+        <a href="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\productos.html">Ver más productos</a>
+    </div>
+</section></section>
+    </main>
+    <!-- Modal del carrito -->
+    <div id="carrito-modal">
+        <h2>Carrito</h2>
+        <ul id="lista-carrito"></ul>
+        <p><strong>Total:</strong> $<span id="total"></span></p>
+        <button class="cerrar-btn" onclick="cerrarCarrito()">Cerrar</button>
+    </div>
+<section id="promocion">
+    <h2>¡Aprovecha nuestra promoción especial!</h2>
+    <p>La oferta termina en:</p>
+    <div id="temporizador"></div>
+</section>
+<script>
+    const cuentaRegresiva = () => {
+        const fechaFin = new Date("2025-06-19T23:59:59").getTime();
+        const ahora = new Date().getTime();
+        const diferencia = fechaFin - ahora;
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById("temporizador").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+        if (diferencia < 0) {
+            document.getElementById("temporizador").innerHTML = "¡Promoción terminada!";
+        }
+    };
+
+    setInterval(cuentaRegresiva, 1000);
+</script><!-- Banner principal -->
+    <section id="banner">
+        <div class="banner-content">
+            <h1>Descubre Nuestra Colección Única</h1>
+            <p>Arte en resina con diseños exclusivos hechos a mano ✨</p>
+            <a href="#Colecciones" class="boton">Ver Colecciones</a>
+        </div>
+    </section>
+
+        <!-- Colecciónes -->
+        <section id="Colecciónes">
+            <h2>Nueva Colección</h2>
+            <div class="galeria">
+                <img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto1.2.jpeg"alt="Producto 1">
+                <img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto2.jpeg" alt="Producto 2">
+<img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto3.1.jpeg""alt="Producto 3">
+<img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto5.jpeg""alt="Producto 4">
+<img src="C:\Users\csigr\OneDrive\Documentos\pagina\Sisi30007.github.io\Pagina\Foto0.jpeg""alt="Producto 5">
+<img src="alt="Producto 6">
+<img src="alt="Producto 7">
+
+
+            </div>
+ </section>
+
+
+   <!-- Sección de Videos -->
+<section id="videos">
+    <h2>Nuestro Proceso</h2>
+    <div class="contenedor-video">
+        <video id="videoPlayer" controls width="500px" height="500px" style="border-radius: 10px; transition: opacity 0.5s;">
+            <source id="videoSource" src="C:/Users/csigr/OneDrive/Documentos/pagina/Sisi30007.github.io/Pagina/Video1.mp4" type="video/mp4">
+            Tu navegador no soporta este formato de video.
+        </video>
+    </div>
+
+    <div class="botones">
+        <button onclick="cambiarVideo('C:/Users/csigr/OneDrive/Documentos/pagina/Sisi30007.github.io/Pagina/Video1.mp4')">Video 1</button>
+        <button onclick="cambiarVideo('C:/Users/csigr/OneDrive/Documentos/pagina/Sisi30007.github.io/Pagina/Video2.mp4')">Video 2</button>
+        <button onclick="cambiarVideo('C:/Users/csigr/OneDrive/Documentos/pagina/Sisi30007.github.io/Pagina/Video3.mp4')">Video 3</button>
+    </div>
+</section>
+       <script>
+function cambiarVideo(nuevoVideo) {
+    let video = document.getElementById("videoPlayer");
+    let source = document.getElementById("videoSource");
+
+    video.style.opacity = 0; // Efecto de desaparición antes de cambiar el video
+    setTimeout(() => {
+        source.src = nuevoVideo;
+        video.load();
+        video.style.opacity = 1; // Transición suave
+    }, 500);
+}
+</script>
+
+        <!-- Contacto -->
+<section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>¡Estamos aquí para ayudarte! Escríbenos en nuestro <a href="https://www.instagram.com/Resin_arte_6/" target="_blank" style="color: #f45699; text-decoration: none;">Instagram: @Resin_arte_6</a></p>
+</section>
+
+
+    </main>
+    <footer>
+        <p>© 2025 Resin-Arte. Todos los derechos reservados.</p>
+    </footer>
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/2711803162" target="_blank" class="whatsapp-btn">💬 Contáctanos por WhatsApp</a>
+    <script>
+        let carrito = [];
+
+        function agregarAlCarrito(producto, precio) {
+            carrito.push({ producto, precio });
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const listaCarrito = document.getElementById('lista-carrito');
+            listaCarrito.innerHTML = '';
+            carrito.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.producto} - $${item.precio} <button onclick="eliminarDelCarrito(${index})">Eliminar</button>`;
+                listaCarrito.appendChild(li);
+            });
+
+            const total = document.getElementById('total');
+            total.textContent = calcularTotal();
+        }
+
+        function eliminarDelCarrito(indice) {
+            carrito.splice(indice, 1);
+            actualizarCarrito();
+        }
+
+        function calcularTotal() {
+            return carrito.reduce((total, item) => total + item.precio, 0).toFixed(2);
+        }
+
+        function mostrarCarrito() {
+            const carritoModal = document.getElementById('carrito-modal');
+            carritoModal.style.display = 'block';
+        }
+
+        function cerrarCarrito() {
+            const carritoModal = document.getElementById('carrito-modal');
+            carritoModal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
