@@ -1,0 +1,133 @@
+/* Estilo general */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fae0f5;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #f45699;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    overflow: hidden;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #faf8fb;
+    padding: 15px 20px;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #fbcaeb;
+    transition: background-color 0.3s;
+}
+
+/* Secciones */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+    background-color: #faf8fb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #fc74c4;
+}
+
+/* Productos */
+.productos {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.producto {
+    text-align: center;
+    width: 150px;
+}
+
+.producto img {
+    width: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+}
+/* Animación de Hover en Botones */
+button:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.contenedor-videos {
+    display: flex; /* Poner en fila */
+    gap: 15px; /* Espacio entre los videos */
+    justify-content: center; /* Centrar los videos */
+}
+
+video {
+    width: 30%; /* Ajustar tamaño */
+    border-radius: 8px; /* Esquinas redondeadas */
+}
+.producto img {
+    width: 100px; /* Tamaño más pequeño */
+    height: auto; /* Mantener proporciones */
+    border-radius: 10px; /* Bordes redondeados */
+}
+.productos-container {
+    display: flex; /* Mostrar los productos en fila */
+    gap: 20px; /* Espacio entre productos */
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    white-space: nowrap; /* Evita que los productos se acomoden en varias líneas */
+    padding: 10px;
+}
+
+/* Ajustar el tamaño de los productos */
+.producto {
+    min-width: 200px; /* Tamaño mínimo para cada producto */
+    text-align: center; /* Centra el texto */
+}
+
+/* Ajustar el tamaño de las imágenes */
+.producto img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
